@@ -1,6 +1,8 @@
 package Model;
 
 import java.util.List;
+import Exception.VehicleAlreadyExists;
+import Exception.NoVehicleForUser;
 
 public class User {
     private int age;
@@ -17,6 +19,12 @@ public class User {
         this.vehicles = vehicles;
         this.ridesShared = ridesShared;
         this.ridesTaken = ridesTaken;
+    }
+
+    public User(int age, String userName, String userGender) {
+        this.age = age;
+        this.userName = userName;
+        this.userGender = userGender;
     }
 
     public int getAge() {
@@ -70,4 +78,23 @@ public class User {
     public void addRidesShared(Ride ride){ridesShared.add(ride);}
 
     public void addRidesTaken(Ride ride){ridesTaken.add(ride);}
+
+    public void addVehicle(Vehicle vehicle){
+        if (vehicles.contains(vehicle)){
+            throw new VehicleAlreadyExists();
+        }
+        vehicles.add(vehicle);
+    }
+
+    public boolean checkVehicle(String regNo){
+        boolean flag = false;
+
+        for (Vehicle v : vehicles){
+            if (v.getRegistrationNo().equals(regNo)) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
 }

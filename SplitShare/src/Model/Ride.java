@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,16 +16,16 @@ public class Ride {
     private String vehicleModel;
     private RideStatus rideStatus;
 
-    public Ride(String origin, String destination, String offeredBy, List<String> selectedBy, int availableSeats, String vehicleNum, String vehicleModel, RideStatus rideStatus) {
+    public Ride(String origin, String destination, String offeredBy,int availableSeats, String vehicleNum, String vehicleModel) {
         this.rideId = UUID.randomUUID();
         this.origin = origin;
         this.destination = destination;
         this.offeredBy = offeredBy;
-        this.selectedBy = selectedBy;
+        this.selectedBy = new ArrayList<>();
         this.availableSeats = availableSeats;
         this.vehicleNum = vehicleNum;
         this.vehicleModel = vehicleModel;
-        this.rideStatus = rideStatus;
+        this.rideStatus = RideStatus.ACTIVE;
     }
 
     public UUID getRideId() {
@@ -101,5 +102,15 @@ public class Ride {
 
     public void endRide(){
         this.rideStatus = RideStatus.END;
+    }
+
+    public void addPassengers(String name,int seats){
+        selectedBy.add(name);
+        availableSeats -= seats;
+    }
+
+    @Override
+    public String toString() {
+        return "Ride details:- Ride created by "+offeredBy;
     }
 }
