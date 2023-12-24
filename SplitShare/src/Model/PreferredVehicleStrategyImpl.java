@@ -16,7 +16,7 @@ public class PreferredVehicleStrategyImpl implements SelectionStrategy{
         for (Ride r: activeRides.values()){
             if (r.getOrigin().equals(origin) && r.getDestination().equals(destination)){
                 if(r.getAvailableSeats() >= seats){
-                    if (r.getVehicleNum().equals(vehicle)){
+                    if (r.getVehicleModel().equals(vehicle)){
                         potentialRide =r;
                     }
                 }

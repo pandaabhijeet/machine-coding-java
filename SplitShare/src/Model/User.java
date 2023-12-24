@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.List;
 import Exception.VehicleAlreadyExists;
 import Exception.NoVehicleForUser;
@@ -12,20 +13,20 @@ public class User {
     private List<Ride> ridesShared;
     private List<Ride> ridesTaken;
 
-    public User(int age, String userName, String userGender, List<Vehicle> vehicles, List<Ride> ridesShared, List<Ride> ridesTaken) {
-        this.age = age;
-        this.userName = userName;
-        this.userGender = userGender;
-        this.vehicles = vehicles;
-        this.ridesShared = ridesShared;
-        this.ridesTaken = ridesTaken;
-    }
-
     public User(int age, String userName, String userGender) {
         this.age = age;
         this.userName = userName;
         this.userGender = userGender;
+        this.vehicles = new ArrayList<>();
+        this.ridesShared = new ArrayList<>();
+        this.ridesTaken = new ArrayList<>();
     }
+
+//    public User(int age, String userName, String userGender) {
+//        this.age = age;
+//        this.userName = userName;
+//        this.userGender = userGender;
+//    }
 
     public int getAge() {
         return age;

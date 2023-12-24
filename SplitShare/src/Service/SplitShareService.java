@@ -5,6 +5,9 @@ import Repository.RideManager;
 import Repository.UserManager;
 import Exception.NoRideFound;
 
+import java.util.Collection;
+import java.util.List;
+
 public class SplitShareService {
 
     private RideManager rideManager;
@@ -45,12 +48,12 @@ public class SplitShareService {
     public void offerRide(String name, String origin, int availableSeats, String model, String vehicleNo, String destination) {
 
         User user = userManager.getUser(name);
-        if (!user.checkVehicle(vehicleNo)) {
+        if (user.checkVehicle(vehicleNo)) {
             try {
                 Ride ride = new Ride(origin, destination, user.getUserName(), availableSeats, vehicleNo, model);
-                rideManager.addRidesOffered(ride.getVehicleNum());
+                rideManager.addRidesOffered(ride,ride.getOfferedBy());
                 System.out.println("Ride with id : " + ride.getRideId() + " and Registration No: " + ride.getVehicleNum()
-                        + "and model :" + ride.getVehicleModel() + "and with seats: " + ride.getAvailableSeats() +
+                        + "and model :" + ride.getVehicleModel() + " and with seats: " + ride.getAvailableSeats() +
                         " has been offered by " + ride.getOfferedBy());
 
             } catch (Exception e) {
@@ -84,5 +87,30 @@ public class SplitShareService {
         }
 
         return ride;
+    }
+
+    public void endRide(String name,String origin,int seats,String model,String regNo,String destination){
+        Ride ride = rideManager.endRide(regNo);
+        ride.endRide();
+        String offeredBy = ride.getOfferedBy();
+        User user = userManager.getUser(offeredBy);
+        user.addRidesShared(ride);
+
+        List<String> selectedBy = ride.getSelectedBy();
+
+        for (String s : selectedBy){
+           user = userManager.getUser(s);
+           user.addRidesTaken(ride);
+        }
+    }
+
+    public void printRideStatus(){
+        Collection<User> users = userManager.usersCollection();
+
+        for (User user:users) {
+
+            System.out.println("User : "+user.getUserName()+" has taken " +user.getRidesTaken().size() +" rides and shared "
+                    + user.getRidesShared().size() + " !");
+        }
     }
 }

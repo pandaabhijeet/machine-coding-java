@@ -33,7 +33,7 @@ public class UserManager {
 
     public User getUser(String name){
 
-            if (userMap.containsKey(name)){
+            if (!userMap.containsKey(name)){
                 throw new InvalidUser();
             }
 

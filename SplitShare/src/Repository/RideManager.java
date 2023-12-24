@@ -24,14 +24,13 @@ public class RideManager {
         this.activeRides = activeRides;
     }
 
-    public void addRidesOffered(String vehicleNo){
+    public void addRidesOffered(Ride ride, String userName){
         for (Ride r : activeRides.values()){
-            if (r.getVehicleNum().equals(vehicleNo)){
+            if (r.getVehicleNum().equals(ride.getVehicleNum())){
                 throw new RideAlreadyExists();
             }
-
-            activeRides.put(r.getRideId(),r);
         }
+        activeRides.put(ride.getRideId(),ride);
     }
 
     public Ride endRide(String vehicleNo){
