@@ -17,5 +17,9 @@ public class Main {
           cinemaBookingService.addCitiesToMovie("Fighter", new String[]{"Madurai","Patna"});
           cinemaBookingService.addTheaterToLocations("Bhubaneswar","Maharaja",256);
           cinemaBookingService.addTheaterToLocations("Bhubaneswar","Inox",256);
+          cinemaBookingService.addSeatTypeAndPriceToTheater("Inox","Diamond",400);
+          cinemaBookingService.addSeatTypeAndPriceToTheater("Inox","Platinum",300);
+          cinemaBookingService.addSeatTypeAndPriceToTheater("Inox","Gold",200);
+          cinemaBookingService.addSeatTypeAndPriceToTheater("Inox","Gold",200);
     }
 }

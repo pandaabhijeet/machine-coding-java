@@ -1,9 +1,6 @@
 package Services;
 
-import Models.Location;
-import Models.Movie;
-import Models.Theater;
-import Models.User;
+import Models.*;
 import Repositories.MovieManager;
 import Repositories.UserManager;
 
@@ -72,5 +69,35 @@ public class CinemaBookingService {
         }catch(Exception e){
             System.out.println("Exception in adding theater: "+e.getMessage());
         }
+    }
+
+    public void addSeatTypeAndPriceToTheater(String theaterName, String seatType, float price){
+        Theater theater = movieManager.getTheaterByName(theaterName);
+        Seat seatSelType;
+          if(theater != null){
+              try{
+                  switch (seatType) {
+                      case "Diamond" -> {
+                          seatSelType = Seat.DIAMOND;
+                          movieManager.addSeatAndPrice(theater, seatSelType, price);
+                      }
+                      case "Platinum" -> {
+                          seatSelType = Seat.PLATINUM;
+                          movieManager.addSeatAndPrice(theater, seatSelType, price);
+                      }
+                      case "Gold" -> {
+                          seatSelType = Seat.GOLD;
+                          movieManager.addSeatAndPrice(theater, seatSelType, price);
+                      }
+                      default -> {
+                          System.out.println("Exception in adding Seat type and price: Invalid Seat Type!");
+                      }
+                  }
+
+
+              }catch(Exception e){
+                  System.out.println("Exception in adding Seat type and price: "+e.getMessage());
+              }
+          }
     }
 }

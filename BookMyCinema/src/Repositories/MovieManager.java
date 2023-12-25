@@ -2,9 +2,11 @@ package Repositories;
 
 import Exceptions.CityAlreadyAdded;
 import Exceptions.MovieAlreadyExists;
+import Exceptions.NoSuchTheater;
 import Exceptions.TheaterAlreadyExists;
 import Models.Location;
 import Models.Movie;
+import Models.Seat;
 import Models.Theater;
 
 import java.util.*;
@@ -77,6 +79,14 @@ public class MovieManager {
         return null;
     }
 
+    public Theater getTheaterByName(String theaterName){
+        if(theaterByName.containsKey(theaterName)){
+            return theaterByName.get(theaterName);
+        }
+
+        return null;
+    }
+
     public void addTheater(Theater theater, String theaterName, Location location) {
 
         if(location.getTheaters() != null){
@@ -88,7 +98,20 @@ public class MovieManager {
             }
         }
         location.getTheaters().add(theater);
+        theaterByName.put(theaterName, theater);
         System.out.println("Theaters in location now : " + location.getTheaters().get(0).getTheaterName()
         + "," +location.getTheaters().get(1).getTheaterName());
+    }
+
+    public void addSeatAndPrice(Theater theater, Seat seatType, float seatPrice){
+        if(!theaterByName.containsKey(theater.getTheaterName()))
+        {
+            throw new NoSuchTheater();
+        }
+        HashMap<Float,Seat> seatWithPriceMap = new HashMap<>();
+        seatWithPriceMap.put(seatPrice,seatType);
+        theater.setPriceForSeats(seatWithPriceMap);
+
+        System.out.println("Price and seats for theater added : " + seatWithPriceMap);
     }
 }
