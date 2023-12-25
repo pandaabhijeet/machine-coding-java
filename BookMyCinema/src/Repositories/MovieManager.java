@@ -4,8 +4,7 @@ import Exceptions.CityAlreadyAdded;
 import Exceptions.MovieAlreadyExists;
 import Models.Movie;
 
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 
 public class MovieManager {
 
@@ -31,15 +30,21 @@ public class MovieManager {
 
     public void addCityToMovie(String[] cities, Movie movie){
 
-        for (String s: movie.getCitiesRunning()) {
+        List<String> cityList = new ArrayList<>();
 
-            for(String city : cities){
-                if (!city.equals(s)){
-                    movie.getCitiesRunning().add(city);
-                }else{
-                    System.out.print(city + "Already exists in the list");
+        for (String s: cities) {
+            if (!movie.getCitiesRunning().contains(s)){
+                if(!cityList.contains(s)){
+                    cityList.add(s);
                 }
+            }else{
+                System.out.println("City already exists : "+s);
             }
         }
+
+        for (String s:cityList){
+            movie.getCitiesRunning().add(s);
+        }
+        System.out.println("Cities Now " + movie.getCitiesRunning());
     }
 }

@@ -11,8 +11,9 @@ public class Main {
 //        cinemaBookingService.addUser("Nikhil",24,"9668264969","Bhubaneswar",'M');
 
           cinemaBookingService.addMovie("Fighter", new String[]{"Bhubaneswar", "Delhi", "Mumbai"});
-          //cinemaBookingService.addMovie("Fighter", new String[]{"Bhubaneswar", "Delhi", "Mumbai"});
-          //cinemaBookingService.addCitiesToMovie("Fighter", new String[]{"Bhubaneswar"});
+          cinemaBookingService.addMovie("Fighter", new String[]{"Bhubaneswar", "Delhi", "Mumbai"});
+          cinemaBookingService.addCitiesToMovie("Fighter", new String[]{"Bhubaneswar"});
+          cinemaBookingService.addCitiesToMovie("Fighter", new String[]{"Madurai","Patna"});
           cinemaBookingService.addCitiesToMovie("Fighter", new String[]{"Madurai","Patna"});
     }
 }
