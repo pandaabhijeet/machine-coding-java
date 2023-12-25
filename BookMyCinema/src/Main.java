@@ -15,5 +15,6 @@ public class Main {
           cinemaBookingService.addCitiesToMovie("Fighter", new String[]{"Bhubaneswar"});
           cinemaBookingService.addCitiesToMovie("Fighter", new String[]{"Madurai","Patna"});
           cinemaBookingService.addCitiesToMovie("Fighter", new String[]{"Madurai","Patna"});
+          cinemaBookingService.addTheaterToLocations("Bhubaneswar","Maharaja",256);
     }
 }

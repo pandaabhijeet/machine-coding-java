@@ -1,6 +1,8 @@
 package Services;
 
+import Models.Location;
 import Models.Movie;
+import Models.Theater;
 import Models.User;
 import Repositories.MovieManager;
 import Repositories.UserManager;
@@ -54,6 +56,21 @@ public class CinemaBookingService {
             }
         }catch(RuntimeException e){
             System.out.println("Exception in adding cities: "+e.getMessage());
+        }
+    }
+
+    public void addTheaterToLocations(String location, String theaterName, int noOfSeats){
+
+        Location locationCity = movieManager.getLocationByName(location);
+        Theater theater = new Theater(theaterName,noOfSeats);
+
+        try{
+            if(locationCity != null){
+                movieManager.addTheater(theater,theaterName,locationCity);
+                System.out.println("Theater : " +theaterName +" added to location : " + location);
+            }
+        }catch(Exception e){
+            System.out.println("Exception in adding theater: "+e.getMessage());
         }
     }
 }
