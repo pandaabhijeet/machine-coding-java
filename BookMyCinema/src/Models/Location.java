@@ -1,5 +1,6 @@
 package Models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Location {
@@ -12,6 +13,11 @@ public class Location {
         this.locationName = locationName;
         this.noOfTheaters = noOfTheaters;
         this.theaters = theaters;
+    }
+
+    public Location(String locationName){
+        this.locationName = locationName;
+        this.theaters = new ArrayList<>();
     }
 
     public String getLocationName() {

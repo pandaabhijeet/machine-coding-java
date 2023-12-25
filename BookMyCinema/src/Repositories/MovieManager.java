@@ -22,6 +22,14 @@ public class MovieManager {
         }
 
         movieForName.put(movie.getMovieName(), movie);
+
+        for(String s : movie.getCitiesRunning()){
+            if(!locationForName.containsKey(s)){
+                Location location = new Location(s);
+                locationForName.put(s,location);
+            }
+
+        }
     }
 
     public Movie getMovie(String movieName){
@@ -50,6 +58,14 @@ public class MovieManager {
         for (String s:cityList){
             movie.getCitiesRunning().add(s);
         }
+
+        for(String s : movie.getCitiesRunning()){
+            if(!locationForName.containsKey(s)){
+                Location location = new Location(s);
+                locationForName.put(s,location);
+            }
+
+        }
         System.out.println("Cities Now " + movie.getCitiesRunning());
     }
 
@@ -63,14 +79,16 @@ public class MovieManager {
 
     public void addTheater(Theater theater, String theaterName, Location location) {
 
-        for(Theater t : location.getTheaters()){
-            if (theaterName.equals(t.getTheaterName())){
-                throw new TheaterAlreadyExists();
+        if(location.getTheaters() != null){
+            for(Theater t : location.getTheaters()){
+                if (theaterName.equals(t.getTheaterName())){
+                    throw new TheaterAlreadyExists();
+                }
+                break;
             }
-            break;
         }
-
         location.getTheaters().add(theater);
-        System.out.println("Theaters in location now : "+ location.getTheaters());
+        System.out.println("Theaters in location now : " + location.getTheaters().get(0).getTheaterName()
+        + "," +location.getTheaters().get(1).getTheaterName());
     }
 }
