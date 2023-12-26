@@ -1,9 +1,6 @@
 package Repositories;
 
-import Exceptions.CityAlreadyAdded;
-import Exceptions.MovieAlreadyExists;
-import Exceptions.NoSuchTheater;
-import Exceptions.TheaterAlreadyExists;
+import Exceptions.*;
 import Models.Location;
 import Models.Movie;
 import Models.Seat;
@@ -17,6 +14,7 @@ public class MovieManager {
     private HashMap<String, Location> locationForName = new HashMap<>();
     private HashMap<String, Theater> theaterByName = new HashMap<>();
 
+
     public void addMovie(Movie movie){
         if (movieForName.containsKey(movie.getMovieName()))
         {
@@ -25,13 +23,21 @@ public class MovieManager {
 
         movieForName.put(movie.getMovieName(), movie);
 
+        //List<Movie> moviesRunning = new ArrayList<>();
+        //moviesRunning.add(movie);
+
+        Location location = new Location();
+
         for(String s : movie.getCitiesRunning()){
             if(!locationForName.containsKey(s)){
-                Location location = new Location(s);
+                location.setLocationName(s);
                 locationForName.put(s,location);
+            } else{
+                location = locationForName.get(s);
             }
-
         }
+
+        location.getMoviesShowing().add(movie);
     }
 
     public Movie getMovie(String movieName){
@@ -61,9 +67,11 @@ public class MovieManager {
             movie.getCitiesRunning().add(s);
         }
 
+        List<Movie> moviesRunning = new ArrayList<>();
         for(String s : movie.getCitiesRunning()){
             if(!locationForName.containsKey(s)){
                 Location location = new Location(s);
+                location.setMoviesShowing(moviesRunning);
                 locationForName.put(s,location);
             }
 
@@ -113,5 +121,12 @@ public class MovieManager {
         theater.setPriceForSeats(seatWithPriceMap);
 
         System.out.println("Price and seats for theater added : " + seatWithPriceMap);
+    }
+
+    public List<Movie> getAllMoviesShowing(Location cityName) {
+        if(cityName.getMoviesShowing() == null){
+            throw new NoMoviesShowing();
+        }
+        return cityName.getMoviesShowing();
     }
 }

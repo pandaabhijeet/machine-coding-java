@@ -8,11 +8,17 @@ public class Location {
     String locationName;
     int noOfTheaters;
     List<Theater> theaters;
+    List<Movie> moviesShowing;
+
+    public Location() {
+        this.moviesShowing = new ArrayList<>();
+    }
 
     public Location(String locationName, int noOfTheaters, List<Theater> theaters) {
         this.locationName = locationName;
         this.noOfTheaters = noOfTheaters;
         this.theaters = theaters;
+        this.moviesShowing = new ArrayList<>();
     }
 
     public Location(String locationName){
@@ -42,5 +48,13 @@ public class Location {
 
     public void setTheaters(List<Theater> theaters) {
         this.theaters = theaters;
+    }
+
+    public List<Movie> getMoviesShowing() {
+        return moviesShowing;
+    }
+
+    public void setMoviesShowing(List<Movie> moviesShowing) {
+        this.moviesShowing = moviesShowing;
     }
 }

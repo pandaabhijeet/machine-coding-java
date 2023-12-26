@@ -100,4 +100,24 @@ public class CinemaBookingService {
               }
           }
     }
+
+    public void selectCity(String cityName){
+        Location location = movieManager.getLocationByName(cityName);
+        List<Movie> moviesShowing;
+        try{
+           if(location != null){
+               moviesShowing = movieManager.getAllMoviesShowing(location);
+
+               System.out.println("Movies showing in the selected city are : ");
+
+               for(Movie s : moviesShowing){
+                   String movieName = s.getMovieName();
+                   System.out.println(movieName);
+               }
+
+           }
+        }catch (Exception e){
+            System.out.println("Exception in selecting city : "+e.getMessage());
+        }
+    }
 }
