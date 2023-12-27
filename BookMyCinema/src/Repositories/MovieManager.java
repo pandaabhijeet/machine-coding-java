@@ -26,18 +26,20 @@ public class MovieManager {
         //List<Movie> moviesRunning = new ArrayList<>();
         //moviesRunning.add(movie);
 
-        Location location = new Location();
+
 
         for(String s : movie.getCitiesRunning()){
+            Location location;
             if(!locationForName.containsKey(s)){
-                location.setLocationName(s);
+                location = new Location(s);
                 locationForName.put(s,location);
             } else{
                 location = locationForName.get(s);
             }
+            location.getMoviesShowing().add(movie);
+
         }
 
-        location.getMoviesShowing().add(movie);
     }
 
     public Movie getMovie(String movieName){

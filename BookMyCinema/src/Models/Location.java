@@ -24,6 +24,7 @@ public class Location {
     public Location(String locationName){
         this.locationName = locationName;
         this.theaters = new ArrayList<>();
+        this.moviesShowing = new ArrayList<>();
     }
 
     public String getLocationName() {
